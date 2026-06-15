@@ -1,19 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home/Home";
-import BrowseGames from "../pages/BrowseGames/BrowseGames";
-import GameDetails from "../pages/GameDetails/GameDetails";
-import Favorites from "../pages/Favorites/Favorites";
-import About from "../pages/About/About";
-
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/games" element={<BrowseGames />} />
-      <Route path="/games/:id" element={<GameDetails />} />
-      <Route path="/favorites" element={<Favorites />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/" element={<h1>Home</h1>} />
+      <Route path="/games" element={<h1>Games</h1>} />
+      <Route path="/games/:id" element={<h1>Game Details</h1>} />
+      <Route path="/favorites" element={<h1>Favorites</h1>} />
+      <Route path="/about" element={<h1>About</h1>} />
     </Routes>
   );
 }
