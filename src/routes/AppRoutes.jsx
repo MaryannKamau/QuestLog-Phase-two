@@ -7,7 +7,7 @@ import BrowseGames from "../pages/BrowseGames/BrowseGames";
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<h1>Home</h1>} />
+      <Route path="/" element={<Home />} />
       <Route path="/games" element={<h1>Games</h1>} />
       <Route path="/games/:id" element={<h1>Game Details</h1>} />
       <Route path="/favorites" element={<h1>Favorites</h1>} />
