@@ -1,44 +1,40 @@
 import { createContext, useContext, useState } from "react";
 
-const FavouritesContext = createContext();
+const FavoritesContext = createContext();
 
-export function FavouritesProvider({ children }) {
-  const [favourites, setFavourites] = useState([]);
+export function FavoritesProvider({ children }) {
+  const [favorites, setFavorites] = useState([]);
 
-  const addFavourite = (game) => {
-    const exists = favourites.find(
-      (favourite) => favourite.id === game.id
-    );
+  const addFavorite = (game) => {
+    const exists = favorites.find((favorite) => favorite.id === game.id);
 
     if (!exists) {
-      setFavourites([...favourites, game]);
+      setFavorites([...favorites, game]);
     }
   };
 
-  const removeFavourite = (gameId) => {
-    setFavourites(
-      favourites.filter((game) => game.id !== gameId)
-    );
+  const removeFavorite = (gameId) => {
+    setFavorites(favorites.filter((game) => game.id !== gameId));
   };
 
-  const isFavourite = (gameId) => {
-    return favourites.some((game) => game.id === gameId);
+  const isFavorite = (gameId) => {
+    return favorites.some((game) => game.id === gameId);
   };
 
   return (
-    <FavouritesContext.Provider
+    <FavoritesContext.Provider
       value={{
-        favourites,
-        addFavourite,
-        removeFavourite,
-        isFavourite,
+        favorites,
+        addFavorite,
+        removeFavorite,
+        isFavorite,
       }}
     >
       {children}
-    </FavouritesContext.Provider>
+    </FavoritesContext.Provider>
   );
 }
 
-export function useFavourites() {
-  return useContext(FavouritesContext);
+export function useFavorites() {
+  return useContext(FavoritesContext);
 }
