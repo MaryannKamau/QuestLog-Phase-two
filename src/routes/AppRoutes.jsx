@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import BrowseGames from "../pages/BrowseGames/BrowseGames";
+import GameDetails from "../pages/GameDetails/GameDetails";
 import About from "../pages/About/About";
 
 function AppRoutes() {
@@ -8,8 +9,8 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<BrowseGames />} />
       <Route path="/games" element={<BrowseGames />} />
-      <Route path="/games/:id" element={<h1>Game Details</h1>} />
-      <Route path="/favorites" element={<h1>Favorites</h1>} />
+      <Route path="/games/:id" element={<GameDetails />} />
+      <Route path="/favorites" element={<Favorites/>} />
       <Route path="/about" element={<About />} />
     </Routes>
   );
