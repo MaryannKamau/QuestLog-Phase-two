@@ -27,20 +27,28 @@ export function FavoritesProvider({ children }) {
     );
   };
 
+  const value = {
+    favorites,
+    addFavorite,
+    removeFavorite,
+    isFavorite,
+  };
+
   return (
-    <FavoritesContext.Provider
-      value={{
-        favorites,
-        addFavorite,
-        removeFavorite,
-        isFavorite,
-      }}
-    >
+    <FavoritesContext.Provider value={value}>
       {children}
     </FavoritesContext.Provider>
   );
 }
 
 export function useFavorites() {
-  return useContext(FavoritesContext);
+  const context = useContext(FavoritesContext);
+
+  if (!context) {
+    throw new Error(
+      "useFavorites must be used within a FavoritesProvider"
+    );
+  }
+
+  return context;
 }
