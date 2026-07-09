@@ -7,11 +7,13 @@ import Favorites from "../pages/Favorites/Favorites";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Collections from "../pages/Collections/Collections";
+import Home from "../pages/Home/Home";
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<BrowseGames />} />
+
+      <Route path="/" element={<Home />} />
       <Route path="/games" element={<BrowseGames />} />
       <Route path="/games/:id" element={<GameDetails />} />
       <Route path="/favorites" element={<Favorites />} />

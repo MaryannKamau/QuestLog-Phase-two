@@ -8,8 +8,8 @@ The application dynamically interfaces with the live public **RAWG API** to aggr
 ##  Live Production Deployments
 The application is fully deployed and synchronized across a secure, split cloud infrastructure network on the live public internet:
 
-*  **Frontend Client Interface (Vercel):** [https://quest-log-2rz9.vercel.app]
-*  **Backend Database API Server (Render)**:[https://questlog-backend-7tvc.onrender.com]
+*  **Frontend Client Interface (Vercel):** 
+*  **Backend Database API Server (Render)**:
 
 ---
 
@@ -34,7 +34,7 @@ The application is fully deployed and synchronized across a secure, split cloud 
 
 ### Production Environment Variables Configuration
 To link the decoupled server clusters, the following cloud configuration variables are injected inside the web dashboards:
-* **Vercel Settings:** `VITE_API_BASE_URL` is mapped directly to our live production database routing target: `https://questlog-backend-7tvc.onrender.com/api`.
+* **Vercel Settings:** `VITE_API_BASE_URL` is mapped directly to our live production database routing target: .
 * **Render Settings:** `RAWG_API_KEY` is hardcoded globally within the app config context to securely pass credential verification to the RAWG metadata gateways.
 
 

@@ -32,7 +32,7 @@ const  Home = () => {
             <div className="hero-content">
               <h1>Track Your Next Adventure</h1>
                <p>Discover trending titles, track your backlog, and manage your ultimate library.</p>
-               <button className="hero-cta-btn">Explore Games</button>
+               
             </div>
           </header>
 
@@ -50,10 +50,44 @@ const  Home = () => {
            )}
           </section>
 
-          < footer className="footer-section">
-            <div className="footer-content">
-                <p>© {new Date().getFullYear()} <span className="brand-highlight">QuestLog</span>. All rights reserved.</p>
-                <p className="api-attribution">Powered by the <a href="https://rawg.io" target="_blank" rel="noreferrer">RAWG API</a></p>
+          <footer style={{
+            backgroundColor: '#070913',
+            borderTop: '1px solid rgba(139, 92, 246, 0.2)',
+            padding: '30px 20px',
+            marginTop: 'auto',
+            width: '100%',
+            // 1. Center the entire container layout box horizontally
+            display: 'flex',
+            justifyContent: 'center',
+            alignitems: 'center',
+            }}>
+            <div style={{
+                // 2. Vertically center individual text blocks in a tidy column
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                gap: '12px',
+                maxWidth: '600px'
+            }}>
+                <p style={{ margin: 0, color: '#9ca3af', fontSize: '0.95rem' }}>
+                    &copy; {new Date().getFullYear()} QuestLog. All rights reserved.
+                </p>
+                <div style={{
+                    // 3. Center the link item elements horizontally side-by-side
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px'
+                }}>
+                    <a href="/about" style={{ color: '#8b5cf6', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                        About
+                    </a>
+                    <a href="https://rawg.io" target="_blank" rel="noreferrer" style={{ color: '#8b5cf6', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                        Powered by RAWG
+                    </a>
+                </div>
             </div>
           </footer>
         </div>
