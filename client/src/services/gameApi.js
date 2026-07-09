@@ -1,5 +1,5 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "https://127.0.0.1:5000/api";
+  import.meta.env.VITE_API_BASE_URL || "https://questlog-backend-2.onrender.com/api";
 
 async function requestGames(params = {}) {
   const queryParams = new URLSearchParams();

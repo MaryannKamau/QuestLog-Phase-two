@@ -16,9 +16,9 @@ const GameCard = ({ game }) => {
   const [message, setMessage] = useState("");
 
   const USER_ID = 2;
-  const API_BASE_HOST = "http://127.0.0.1:5000";
-  const COLL_API = `${API_BASE_HOST}/api/collections`;
-  const FAV_API = `${API_BASE_HOST}/api/favourites`;
+  
+  const COLL_API = `https://questlog-backend-2.onrender.com/api/collections`;
+  const FAV_API = `https://questlog-backend-2.onrender.com/api/favourites`;
 
   useEffect(() => {
     // 1. Fetch available lists for the save dropdown options

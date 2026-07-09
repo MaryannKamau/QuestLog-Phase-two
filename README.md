@@ -9,9 +9,9 @@ The application dynamically interfaces with the live public **RAWG API** to aggr
 The application is fully deployed and synchronized across a secure, split cloud infrastructure network on the live public internet:
 
 *  **Frontend Client Interface (Vercel):** 
-*  **Backend Database API Server (Render)**:
+*  **Backend Database API Server (Render)**:[https://questlog-backend-2.onrender.com]
 
----
+
 
 ## Tech Stack & Cloud Hosting Architecture
 
