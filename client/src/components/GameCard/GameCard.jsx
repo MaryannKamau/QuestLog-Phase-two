@@ -133,7 +133,7 @@ const GameCard = ({ game }) => {
         </div>
 
         <Link
-          to={`/games/${id}`}
+          to={`/game/${id}`}
           className="view-details-btn"
           
         >
