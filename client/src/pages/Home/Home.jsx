@@ -1,121 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import GameCard from '../../components/GameCard/GameCard';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import SearchResults from '../../components/SearchResults/SearchResults'; // Uses your exact component
-import { getGames, searchGames } from '../../services/rawgApi';
-import '../../components/SearchBar/SearchBar.css';
-import '../../components/SearchResults/SearchResults.css';
+import {getGames} from '../../services/rawgApi';
+import '../../styles/globals.css';
 
-const Home = () => {
-    // 1. Trending Content State
-    const [trendingGames, setTrendingGames] = useState([]);
-    const [trendingLoading, setTrendingLoading] = useState(true);
-    const [trendingError, setTrendingError] = useState(null);
+const  Home = () => {
+    const [games,setGames] = useState([]);
+    const [loading,setLoading] = useState(true);
+    const [error,setError] = useState(null);
 
-    // 2. Search Content State (Matches the exact props your SearchResults needs)
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchGamesList, setSearchGamesList] = useState([]);
-    const [searchStatus, setSearchStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
-    const [searchError, setSearchError] = useState('');
-
-    // Fetch default trending games on boot
     useEffect(() => {
-        const fetchTrending = async () => {
+
+        const fetchTrendingGames = async () => {
             try {
-                setTrendingLoading(true);
+                setLoading(true);
                 const data = await getGames();
-                setTrendingGames(data.results || []);
-            } catch (err) {
-                setTrendingError(err.message);
+                setGames(data.results);
+            } catch (error) {
+                setError(error.message);
             } finally {
-                setTrendingLoading(false);
+                setLoading(false);
             }
         };
-        fetchTrending();
+
+        fetchTrendingGames();
     }, []);
 
-    // Fetch search queries automatically when text is submitted
-    useEffect(() => {
-        if (!searchQuery.trim()) {
-            setSearchStatus('idle');
-            setSearchGamesList([]);
-            return;
-        }
-
-        const fetchSearch = async () => {
-            try {
-                setSearchStatus('loading');
-                setSearchError('');
-                const data = await searchGames(searchQuery);
-                setSearchGamesList(data.results || []);
-                setSearchStatus('success');
-            } catch (err) {
-                setSearchError('Failed to fetch search records.');
-                setSearchStatus('error');
-            }
-        };
-
-        fetchSearch();
-    }, [searchQuery]);
-
-    const handleSearchSubmit = (query) => {
-        setSearchQuery(query);
-    };
-
     return (
-        <div className="home-page" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', minHeight: '80vh' }}>
-            
-            {/* Header Hero Banner */}
-            <header className="hero-section">
-                <div className="hero-content">
-                    <h1>Track Your Next Adventure</h1>
-                    <p>Discover trending titles, track your backlog, and manage your ultimate library.</p>
-                    <button 
-                        className="hero-cta-btn"
-                        onClick={() => document.getElementById('search-anchor')?.scrollIntoView({ behavior: 'smooth' })}
-                    >
-                        Explore Games
-                    </button>
-                </div>
-            </header>
-
-            {/* Search Input Box */}
-            <div id="search-anchor" style={{ margin: '40px 0 20px 0', width: '100%' }}>
-                <SearchBar onSearch={handleSearchSubmit} />
+        <div className="home-page">
+      
+          <header className="hero-section">
+            <div className="hero-content">
+              <h1>Track Your Next Adventure</h1>
+               <p>Discover trending titles, track your backlog, and manage your ultimate library.</p>
+               
             </div>
+          </header>
 
-            {/* DYNAMIC LAYOUT AREA */}
-            {searchQuery ? (
-                // Condition A: Pass exact required props directly into your custom SearchResults component
-                <div className="search-results-section" style={{ marginTop: '20px', width: '100%' }}>
-                    <SearchResults 
-                        games={searchGamesList} 
-                        query={searchQuery} 
-                        status={searchStatus} 
-                        error={searchError} 
-                    />
+          <section className="trending-games-section">
+            <h2>Trending Games</h2>
+
+            {loading && <p className="loading-text">Loading awesome games...</p>}
+            {error && <p className="error-text">Oops! {error}</p>}
+            {!loading && !error && (
+              <div className="games-grid">
+               {games.map((singleGame) => (
+                 <GameCard key={singleGame.id} game={singleGame} />
+              ))}
+               </div>
+           )}
+          </section>
+
+          <footer style={{
+            backgroundColor: '#070913',
+            borderTop: '1px solid rgba(139, 92, 246, 0.2)',
+            padding: '30px 20px',
+            marginTop: 'auto',
+            width: '100%',
+            // 1. Center the entire container layout box horizontally
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            }}>
+            <div style={{
+                // 2. Vertically center individual text blocks in a tidy column
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                gap: '12px',
+                maxWidth: '600px'
+            }}>
+                <p style={{ margin: 0, color: '#9ca3af', fontSize: '0.95rem' }}>
+                    &copy; {new Date().getFullYear()} QuestLog. All rights reserved.
+                </p>
+                <div style={{
+                    // 3. Center the link item elements horizontally side-by-side
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px'
+                }}>
+                    <a href="/about" style={{ color: '#8b5cf6', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                        About
+                    </a>
+                    <a href="https://rawg.io" target="_blank" rel="noreferrer" style={{ color: '#8b5cf6', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>
+                        Powered by RAWG
+                    </a>
                 </div>
-            ) : (
-                // Condition B: Fallback defaults display trending items automatically
-                <section className="trending-games-section" style={{ marginTop: '40px' }}>
-                    <h2 style={{ fontSize: '2rem', marginBottom: '20px', color: 'var(--accent-purple, #8b5cf6)' }}>
-                        Trending Games
-                    </h2>
-
-                    {trendingLoading && <p className="loading-text">Loading awesome games...</p>}
-                    {trendingError && <p className="error-text">Oops! {trendingError}</p>}
-                    
-                    {!trendingLoading && !trendingError && (
-                        <div className="games-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '25px' }}>
-                            {trendingGames.map((singleGame) => (
-                                <GameCard key={singleGame.id} game={singleGame} />
-                            ))}
-                        </div>
-                    )}
-                </section>
-            )}
+            </div>
+          </footer>
         </div>
     );
-};
+}
 
 export default Home;
+
