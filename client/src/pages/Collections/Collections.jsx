@@ -115,7 +115,7 @@ function Collections() {
                 <div key={game.id} className="board-game-item">
 
                   <Link 
-                    to={`/game/${game.game_id || game.id}`} 
+                    to={`/games/${game.game_id || game.id}`} 
                     className="board-game-link"
                     style={{ 
                       display: "flex", 
